@@ -1,2 +1,2 @@
 # rickandmorty
-mi primera app con react
+Mi primera app con React Toolkit y Typescrip
