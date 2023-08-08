@@ -1,2 +1,2 @@
 # rickandmorty
-Mi primera app con React Toolkit y Typescrip
+Mi primera app con React Vite, Redux Toolkit y Typescrip
