@@ -10,11 +10,22 @@ import Form from "./Views/Form.jsx";
 
 const App=()=>{
     const [character,setCharacter]=useState([]);
-
+    const onSearch=(id)=>{
+        fetch(`http://localhost:3001/rickandmorty/character/${id}`)
+          .then((response) => response.json())
+          .then((data) => {
+             if (data.name && character.filter((char)=>char.id===data.id).length===0) {
+                setCharacter((oldChars) => [...oldChars, data]);
+             } else if(data.name) {window.alert('Ya agregaste ése personaje')}else{
+                window.alert(data.error);
+             }
+          })
+          .catch((error)=>window.alert('Server caído'));
+      }
 
     return(
         <div>
-            <NavBar />
+            <NavBar onSearch={onSearch} />
             <Routes>
                 <Route path="/" element={<Form />} />
                 <Route path="/home" element={<Home />} />
