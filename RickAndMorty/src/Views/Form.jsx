@@ -1,6 +1,6 @@
 import React from "react";
 import { useState,useEffect } from "react";
-import Validation from "../Component/Validation";
+import Validation from "../Component/Validation.js";
 
 const Form=(props)=>{
     const [userData,setUserData]=useState({
@@ -10,27 +10,65 @@ const Form=(props)=>{
     const [error,setError]=useState({
         userName:'',
         password:'',
-    })
+    });
+    const [isSubmit,setIsSubmit]=useState(false)
+    const [sign,setSign]=useState(false);
     const handleChange=(e)=>{
         const {name,value}=e.target;
+        setIsSubmit(false);
         setUserData({
             ... userData,
             [name]:value,
         });
+        setError(Validation({
+            ... userData,
+            [name]:value,
+        }))
     }
     const handleSubmit=(e)=>{
         e.preventDefault();
-        setError(
-            Validation(userData)
-        )
-        if(!error.name&&!error.password){
-            props.login(userData);
+        console.log(error)
+        setIsSubmit(true)
+        if(!error.userName && !error.password && userData.userName && userData.password){
+            if(sign){
+                props.sign(userData)
+            }else{
+                props.login(userData);
+            }
+            // window.alert('Acceso')
+        }else{
+            window.alert('Cuidado')
         }
+    }
+    const handleSign=(e)=>{
+        e.preventDefault();
+        setError({
+            userName:'',
+            password:'',
+        })
+        setSign(true)
     }
 
     return(
         <div>
-            <h1>Aqui el formulario</h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                <label htmlFor="">Usuario:</label>
+                <input type="text" name="userName" value={userData.userName} onChange={handleChange}/>
+                </div>
+                <div>
+                {(error.userName&&isSubmit)? <p>{error.userName}</p>: null}
+                </div>
+                <div>
+                <label htmlFor="">Contraseña:</label>
+                <input type="password" name="password" value={userData.password} onChange={handleChange}/>
+                </div>
+                <div>
+                {(error.password&&isSubmit)? <p>{error.password}</p>: null}
+                </div>
+                {sign?<button type="submit">Registrar</button>:<button type="submit">Ingresar</button>}
+            </form>
+            {!sign?<button onClick={handleSign}>Registrarse</button>:null}
         </div>
     )
 }
