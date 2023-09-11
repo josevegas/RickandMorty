@@ -1,5 +1,6 @@
-const {postUserController}=require('../controllers/Users/postUserController.js');
-const {getUserController}=require('../controllers/Users/getUserController.js');
+const {postUserController}=require('../../controllers/Users/postUserController.js');
+const {getUserController}=require('../../controllers/Users/getUserController.js');
+const {getUserFavController}=require('../../controllers/Users/getUserFavController.js');
 
 const postUserHandler=async (req,res)=>{
     const {email,password}=req.query;
@@ -28,5 +29,7 @@ const getUserHandler=async (req,res)=>{
         res.status(400).send({error: error.message});
     }
 }
+
+
 
 module.exports={postUserHandler,getUserHandler};

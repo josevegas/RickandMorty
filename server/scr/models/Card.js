@@ -5,7 +5,7 @@ module.exports=(sequelize)=>{
         'Card',
         {
             id:{
-                type: DataTypes.INTEGER,
+                type: DataTypes.STRING,
                 primaryKey: true,
             },
             name:{

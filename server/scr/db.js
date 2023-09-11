@@ -10,7 +10,9 @@ const sequelize = new Sequelize(
 );
 UserFunction(sequelize);
 CardFunction(sequelize);
+
 const {User,Card}=sequelize.models;
+
 User.belongsToMany(Card,{through: 'Favorite'});
 Card.belongsToMany(User,{through: 'Favorite'});
 
