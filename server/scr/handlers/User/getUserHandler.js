@@ -1,7 +1,7 @@
 const {getUserController}=require('../../controllers/Users/getUserController.js');
 
 const getUserHandler=async (req,res)=>{
-    const {email,password}=req.query;
+    const {email,password}=req.params;
     try {
         if(email&&password){
             const login=await getUserController(email,password);

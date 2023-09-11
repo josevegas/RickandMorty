@@ -4,8 +4,8 @@ const {getUserHandler}=require('../handlers/User/getUserHandler.js');
 const {getUserFavHandler}=require('../handlers/User/getUserFavHandler.js');
 
 const userRouter=Router();
-userRouter.post('/',postUserHandler);
-userRouter.get('/',getUserHandler);
+userRouter.post('/:email/:password',postUserHandler);
+userRouter.get('/:email/:password',getUserHandler);
 userRouter.get('/:email',getUserFavHandler);
 
 module.exports={userRouter};
