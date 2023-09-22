@@ -53,26 +53,51 @@ const Form=(props)=>{
     return(
         <div>
             <form onSubmit={handleSubmit}>
-                <div>
-                <label htmlFor="">Usuario:</label>
-                <input type="text" name="userName" value={userData.userName} onChange={handleChange}/>
+                <div className="space-y-12">
+                    <div  className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div className="sm:col-span-4">
+                            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Usuario:</label>
+                            <div className="mt-2">
+                                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                    <input 
+                                        type="text" 
+                                        name="userName" 
+                                        id="username"
+                                        value={userData.userName} 
+                                        onChange={handleChange} 
+                                        className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div>
                 {(error.userName&&isSubmit)? <p>{error.userName}</p>: null}
                 </div>
                 <div>
-                <label htmlFor="">Contraseña:</label>
-                <input type="password" name="password" value={userData.password} onChange={handleChange}/>
+                    <div>
+                        <div>
+                            <label htmlFor="password">Contraseña:</label>
+                            <div>
+                                <div>
+                                    <input 
+                                        type="password" 
+                                        name="password" 
+                                        value={userData.password} 
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
                 </div>
                 <div>
                 {(error.password&&isSubmit)? <p>{error.password}</p>: null}
                 </div>
-                {sign?<button type="submit">Registrar</button>:<button type="submit">Ingresar</button>}
+                {sign?<button type="submit" className="btn">Registrar</button>:<button type="submit" className="btn">Ingresar</button>}
             </form>
-            {!sign?<button onClick={handleSign}>Registrarse</button>:null}
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-              Button
-            </button>
+            {!sign?<button onClick={handleSign} className="btn">Registrarse</button>:null}
         </div>
     )
 }
