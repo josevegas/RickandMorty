@@ -5,12 +5,12 @@ const initialState={
     allCards:[],
     favoriteCards:[],
     user:null,
-    loggin:false,
+    login:false,
 };
 
-export const cardSlice=createSlice(
+export const cardsSlice=createSlice(
     {
-        name: "card",
+        name: "cards",
         initialState,
         reducers:{
             addMyFavorite:(state,action)=>{
@@ -18,7 +18,7 @@ export const cardSlice=createSlice(
                 state.favoriteCards=action.payload;
             },
             getLoginCase:(state,action)=>{
-                state.loggin=action.payload;
+                state.login=action.payload;
             }
         }
     }
@@ -27,15 +27,16 @@ export const cardSlice=createSlice(
 export const {
     addMyFavorite,
     getLoginCase,
-}=cardSlice.actions;
+}=cardsSlice.actions;
 
-export default cardSlice;
+export default cardsSlice.reducer;
 
 export const getLoginAction=(email,password)=>async (dispatch)=>{
     try {
         const isLogin= await axios
-        .get(`/user/${email}/${password}`)
+        .get(`http://localhost:3001/user/${email}/${password}`)
         .then((r)=>r.data);
+        console.log(isLogin)
         dispatch(getLoginCase(isLogin));
     } catch (error) {
         console.log(error)

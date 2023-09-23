@@ -1,5 +1,6 @@
 import React,{ useEffect, useState } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux'
 import axios from "axios";
 import Home from './Views/Home.jsx';
 import NavBar from './Views/NavBar.jsx';
@@ -7,11 +8,14 @@ import About from "./Views/About.jsx";
 import Detail from "./Views/Detail.jsx";
 import Favorite from "./Views/Favorite.jsx";
 import Form from "./Views/Form.jsx";
+import { getLoginAction } from "../redux/cardSlice.js";
 
 const App=()=>{
     const [character,setCharacter]=useState([]);
     const [access,setAccess]=useState(false);
     const navigate=useNavigate();
+    const dispatch=useDispatch();
+    let isLogin=useSelector((state)=>state.cardsReducer.login)
     const onSearch=(id)=>{
         axios(`http://localhost:3001/rickandmorty/character/${id}`)
         .then((response) => response.json())
@@ -25,18 +29,19 @@ const App=()=>{
         .catch((error)=>window.alert('Server caído'));
     }
     const login=(userData)=>{
-        const { userName, password } = userData;
-        const URL = 'http://localhost:3001/rickandmorty/login/';
-        axios(URL + `?userName=${userName}&password=${password}`).then(({ data }) => {
-            const { access } = data;
-            setAccess(data);
+        const { email, password } = userData;
+        dispatch(getLoginAction(email,password));
+        const URL = 'http://localhost:3001/user/';
+        isLogin=axios(URL + `${email}/${password}`).then((response)=>response.json)
+        console.log(isLogin)
+            setAccess(isLogin);
             access && navigate('/home');
-        });
+        // });
     };
     const sign=(userData)=>{
-        const {userName,password}=userData;
-        const URL='http://localhost:3001/rickandmorty/sign/';
-        axios(URL+`?userName=${userName}&password=${password}`).then(({data})=>{
+        const {email,password}=userData;
+        const URL='http://localhost:3001/user/';
+        axios(URL+`${email}/${password}`).then(({data})=>{
             const {access}=data;
             setAccess(data);
         })
