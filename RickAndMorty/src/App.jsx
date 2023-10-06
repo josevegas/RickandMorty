@@ -15,7 +15,7 @@ const App=()=>{
     const [access,setAccess]=useState(false);
     const navigate=useNavigate();
     const dispatch=useDispatch();
-    let isLogin=useSelector((state)=>state.cardsReducer.login)
+    //let isLogin=useSelector((state)=>state.cardsReducer.login)
     const onSearch=(id)=>{
         axios(`http://localhost:3001/rickandmorty/character/${id}`)
         .then((response) => response.json())
@@ -28,14 +28,20 @@ const App=()=>{
         })
         .catch((error)=>window.alert('Server caído'));
     }
-    const login=(userData)=>{
+    const login= (userData)=>{
         const { email, password } = userData;
         dispatch(getLoginAction(email,password));
         const URL = 'http://localhost:3001/user/';
-        isLogin=axios(URL + `${email}/${password}`).then((response)=>response.json)
-        console.log(isLogin)
-            setAccess(isLogin);
-            access && navigate('/home');
+        axios(URL + `${email}/${password}`)
+        .then((response)=>{
+            const {data}=response;
+            console.log(data)
+            setAccess(data)
+            data&&navigate('/home')
+            
+        })
+        // console.log(access);
+        // access && navigate('/home');
         // });
     };
     const sign=(userData)=>{

@@ -18,7 +18,8 @@ export const cardsSlice=createSlice(
                 state.favoriteCards=action.payload;
             },
             getLoginCase:(state,action)=>{
-                state.login=action.payload;
+                state.user=action.payload.email;
+                state.login=action.payload.isLogin;
             }
         }
     }
@@ -36,8 +37,7 @@ export const getLoginAction=(email,password)=>async (dispatch)=>{
         const isLogin= await axios
         .get(`http://localhost:3001/user/${email}/${password}`)
         .then((r)=>r.data);
-        console.log(isLogin)
-        dispatch(getLoginCase(isLogin));
+        dispatch(getLoginCase(email,isLogin));
     } catch (error) {
         console.log(error)
     }
