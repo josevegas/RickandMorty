@@ -32,7 +32,7 @@ const App=()=>{
     const login= (userData)=>{
         const { email, password } = userData;
         dispatch(getLoginAction(email,password));
-        axios(URL + `${email}/${password}`)
+        axios(URL + `user/${email}/${password}`)
         .then((response)=>{
             const {data}=response;
             console.log(data)
@@ -46,7 +46,7 @@ const App=()=>{
     };
     const sign=(userData)=>{
         const {email,password}=userData;
-        axios(URL+`${email}/${password}`).then(({data})=>{
+        axios(URL+`user/${email}/${password}`).then(({data})=>{
             const {access}=data;
             setAccess(data);
         })
