@@ -2,7 +2,7 @@ import React,{ useEffect, useState } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux'
 import axios from "axios";
-axios.defaults.baseURL='https://rickandmorty-production-7404.up.railway.app/';
+// axios.defaults.baseURL='https://rickandmorty-production-7404.up.railway.app/';
 import Home from './Views/Home.jsx';
 import NavBar from './Views/NavBar.jsx';
 import About from "./Views/About.jsx";
@@ -46,7 +46,6 @@ const App=()=>{
     };
     const sign=(userData)=>{
         const {email,password}=userData;
-        const URL='http://localhost:3001/user/';
         axios(URL+`${email}/${password}`).then(({data})=>{
             const {access}=data;
             setAccess(data);
