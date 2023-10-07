@@ -2,6 +2,7 @@ import React,{ useEffect, useState } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux'
 import axios from "axios";
+axios.defaults.baseURL='https://rickandmorty-production-7404.up.railway.app/';
 import Home from './Views/Home.jsx';
 import NavBar from './Views/NavBar.jsx';
 import About from "./Views/About.jsx";
@@ -15,7 +16,7 @@ const App=()=>{
     const [access,setAccess]=useState(false);
     const navigate=useNavigate();
     const dispatch=useDispatch();
-    //let isLogin=useSelector((state)=>state.cardsReducer.login)
+    const URL = 'https://rickandmorty-production-7404.up.railway.app/';
     const onSearch=(id)=>{
         axios(`http://localhost:3001/rickandmorty/character/${id}`)
         .then((response) => response.json())
@@ -31,7 +32,6 @@ const App=()=>{
     const login= (userData)=>{
         const { email, password } = userData;
         dispatch(getLoginAction(email,password));
-        const URL = 'http://localhost:3001/user/';
         axios(URL + `${email}/${password}`)
         .then((response)=>{
             const {data}=response;
