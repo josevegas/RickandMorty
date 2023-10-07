@@ -35,7 +35,7 @@ export default cardsSlice.reducer;
 export const getLoginAction=(email,password)=>async (dispatch)=>{
     try {
         const isLogin= await axios
-        .get(`http://localhost:3001/user/${email}/${password}`)
+        .get(`https://rickandmorty-production-7404.up.railway.app/user/${email}/${password}`)
         .then((r)=>r.data);
         dispatch(getLoginCase(email,isLogin));
     } catch (error) {
