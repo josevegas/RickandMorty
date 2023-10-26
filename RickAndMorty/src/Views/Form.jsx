@@ -27,7 +27,6 @@ const Form=(props)=>{
     }
     const handleSubmit=(e)=>{
         e.preventDefault();
-        console.log(error)
         setIsSubmit(true)
         if(!error.email && !error.password && userData.email && userData.password){
             if(sign){

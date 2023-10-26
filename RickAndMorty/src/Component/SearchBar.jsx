@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import { useSelector } from "react-redux";
 
 const SearchBar=(props)=>{
     const [character, setCharacter]=useState("");
@@ -6,13 +7,15 @@ const SearchBar=(props)=>{
         const {value}=e.target;
         setCharacter(value);
     }
+    
     const handleClick=(e)=>{
         props.onSearch(character);
+        setCharacter('');
     }
 
     return(
         <div>
-            <input type="search" onChange={handleInput} />
+            <input type="search" onChange={handleInput} value={character}/>
             <button onClick={handleClick}>Agregar</button>
         </div>
     )

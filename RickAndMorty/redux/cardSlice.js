@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
+//const URL='https://rickandmorty-production-7404.up.railway.app/'
 
 const initialState={
     allCards:[],
@@ -14,12 +15,18 @@ export const cardsSlice=createSlice(
         initialState,
         reducers:{
             addMyFavorite:(state,action)=>{
-                state.allCards=action.payload;
-                state.favoriteCards=action.payload;
+                state.favoriteCards=[...state.favoriteCards,action.payload];
             },
             getLoginCase:(state,action)=>{
                 state.user=action.payload.email;
                 state.login=action.payload.isLogin;
+            },
+            getCharCase:(state,action)=>{
+                state.allCards=[...state.allCards,action.payload];
+            },
+            delCharCase: (state,action)=>{
+                const id=action.payload;
+                state.allCards=state.allCards.filter((card)=>Number(card.id)!==Number(id));
             }
         }
     }
@@ -28,6 +35,8 @@ export const cardsSlice=createSlice(
 export const {
     addMyFavorite,
     getLoginCase,
+    getCharCase,
+    delCharCase,
 }=cardsSlice.actions;
 
 export default cardsSlice.reducer;
@@ -35,10 +44,23 @@ export default cardsSlice.reducer;
 export const getLoginAction=(email,password)=>async (dispatch)=>{
     try {
         const isLogin= await axios
-        .get(`https://rickandmorty-production-7404.up.railway.app/user/${email}/${password}`)
+        .get(`user/${email}/${password}`)
         .then((r)=>r.data);
-        dispatch(getLoginCase(email,isLogin));
+        dispatch(getLoginCase({email,isLogin}));
     } catch (error) {
         console.log(error)
     }
+}
+export const getCharAction=(id)=> async (dispatch)=>{
+    try {
+        const char= await axios
+        .get(`card/${id}`)
+        .then((r)=>r.data);
+        dispatch(getCharCase(char))
+    } catch (error) {
+        console.log(error)
+    }
+}
+export const delCharAction=(id)=> (dispatch)=>{
+    dispatch(delCharCase(id))
 }
