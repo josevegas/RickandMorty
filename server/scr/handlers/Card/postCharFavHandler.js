@@ -2,7 +2,7 @@ const {postCharFavController}=require('../../controllers/Cards/postCharFavContro
 
 const postCharFavHandler=async (req,res)=>{
     try {
-        const {id,email}=req.query;
+        const {email,id}=req.params;
         if(id&&email){
             const newFav=await postCharFavController(id,email);
             res.status(200).send(newFav);
