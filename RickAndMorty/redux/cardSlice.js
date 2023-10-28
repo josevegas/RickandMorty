@@ -14,7 +14,7 @@ export const cardsSlice=createSlice(
         name: "cards",
         initialState,
         reducers:{
-            addMyFavorite:(state,action)=>{
+            addMyFavoriteCase:(state,action)=>{
                 state.favoriteCards=[...state.favoriteCards,action.payload];
             },
             getLoginCase:(state,action)=>{
@@ -33,7 +33,7 @@ export const cardsSlice=createSlice(
 );
 
 export const {
-    addMyFavorite,
+    addMyFavoriteCase,
     getLoginCase,
     getCharCase,
     delCharCase,
@@ -63,4 +63,14 @@ export const getCharAction=(id)=> async (dispatch)=>{
 }
 export const delCharAction=(id)=> (dispatch)=>{
     dispatch(delCharCase(id))
+}
+export const addMyFavoriteAction=(email,id)=>async (dispatch)=>{
+    try {
+        await axios
+        .post(`card/${email}/${id}`)
+        .then((r)=>r.data);
+        dispatch(addMyFavoriteCase(id))
+    } catch (error) {
+        console.log(error)
+    }
 }

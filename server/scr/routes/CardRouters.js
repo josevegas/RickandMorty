@@ -8,7 +8,7 @@ const cardRouter=Router();
 const storage=multer.memoryStorage();
 
 cardRouter.get('/:id',getCharByIdHandler);
-cardRouter.post('/',postCharFavHandler);
+cardRouter.post('/:email/:id',postCharFavHandler);
 cardRouter.delete('/:email/:id',deleteCharFavHandler);
 
 module.exports={cardRouter};
