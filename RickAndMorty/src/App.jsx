@@ -9,7 +9,7 @@ import About from "./Views/About.jsx";
 import Detail from "./Views/Detail.jsx";
 import Favorite from "./Views/Favorite.jsx";
 import Form from "./Views/Form.jsx";
-import { getLoginAction,getCharAction } from "../redux/cardSlice.js";
+import { getLoginAction,getCharAction, getFavAction } from "../redux/cardSlice.js";
 
 const App=()=>{
    const [access,setAccess]=useState(false);
@@ -38,6 +38,9 @@ const App=()=>{
         .then((response)=>{
             const {data}=response;
             setAccess(data)
+            if(data){
+                dispatch(getFavAction(email))
+            }
             data&&navigate('/home')
         })
     };

@@ -27,6 +27,14 @@ export const cardsSlice=createSlice(
             delCharCase: (state,action)=>{
                 const id=action.payload;
                 state.allCards=state.allCards.filter((card)=>Number(card.id)!==Number(id));
+            },
+            getFavCase: (state,action)=>{
+                const idFav=action.payload.map(char=>char.id);
+                state.favoriteCards=idFav;
+                state.allCards=action.payload;
+            },
+            delFavCase: (state,action)=>{
+                state.favoriteCards=state.favoriteCards.filter(card=>card!==action.payload)
             }
         }
     }
@@ -37,6 +45,8 @@ export const {
     getLoginCase,
     getCharCase,
     delCharCase,
+    getFavCase,
+    delFavCase,
 }=cardsSlice.actions;
 
 export default cardsSlice.reducer;
@@ -70,6 +80,26 @@ export const addMyFavoriteAction=(email,id)=>async (dispatch)=>{
         .post(`card/${email}/${id}`)
         .then((r)=>r.data);
         dispatch(addMyFavoriteCase(id))
+    } catch (error) {
+        console.log(error)
+    }
+}
+export const getFavAction=(email)=>async (dispatch)=>{
+    try {
+        const favChar=await axios
+        .get(`user/${email}`)
+        .then((r)=>r.data);
+        dispatch(getFavCase(favChar));
+    } catch (error) {
+        console.log(error)
+    }
+}
+export const delFavAction=(email,id)=> async (dispatch)=>{
+    try {
+        await axios
+        .delete(`card/${email}/${id}`)
+        .then((r)=>r.data);
+        dispatch(delFavCase(id))
     } catch (error) {
         console.log(error)
     }

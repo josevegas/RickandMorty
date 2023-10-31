@@ -2,7 +2,7 @@ import React,{ useState, useEffect } from "react";
 import heartsolid from '../../image/heartsolid.svg';
 import heart from '../../image/heart.svg';
 import trash from '../../image/trash.svg';
-import { delCharAction,addMyFavoriteAction } from "../../redux/cardSlice";
+import { delCharAction,addMyFavoriteAction, delFavAction } from "../../redux/cardSlice";
 import { useDispatch,useSelector } from "react-redux";
 
 const Card=({id,name,gender,image,species,isFav,favChar})=>{
@@ -17,7 +17,7 @@ const Card=({id,name,gender,image,species,isFav,favChar})=>{
     const handleFav=(e)=>{
         e.preventDefault();
         if(isFav){
-            console.log("se va a eliminar de favoritos")
+            dispatch(delFavAction(user,id))
         }else{
             dispatch(addMyFavoriteAction(user,id))
         }
