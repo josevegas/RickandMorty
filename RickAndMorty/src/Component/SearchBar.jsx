@@ -14,9 +14,9 @@ const SearchBar=(props)=>{
     }
 
     return(
-        <div>
-            <input type="search" onChange={handleInput} value={character}/>
-            <button onClick={handleClick}>Agregar</button>
+        <div className="d-flex" role="search">
+            <input type="search" onChange={handleInput} value={character} className="form-control me-2"/>
+            <button onClick={handleClick} className="btn btn-outline-success" type="submit">Agregar</button>
         </div>
     )
 }

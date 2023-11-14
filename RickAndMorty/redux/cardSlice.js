@@ -4,6 +4,8 @@ import axios from 'axios';
 
 const initialState={
     allCards:[],
+    currentCards:[],
+    prefFilters:[],
     favoriteCards:[],
     user:null,
     login:false,
@@ -23,18 +25,55 @@ export const cardsSlice=createSlice(
             },
             getCharCase:(state,action)=>{
                 state.allCards=[...state.allCards,action.payload];
+                state.currentCards=state.allCards;
+                state.prefFilters=state.currentCards;
             },
             delCharCase: (state,action)=>{
                 const id=action.payload;
                 state.allCards=state.allCards.filter((card)=>Number(card.id)!==Number(id));
+                state.currentCards=state.allCards;
+                state.prefFilters=state.currentCards;
             },
             getFavCase: (state,action)=>{
                 const idFav=action.payload.map(char=>char.id);
                 state.favoriteCards=idFav;
                 state.allCards=action.payload;
+                state.currentCards=action.payload;
             },
             delFavCase: (state,action)=>{
-                state.favoriteCards=state.favoriteCards.filter(card=>card!==action.payload)
+                state.favoriteCards=state.favoriteCards.filter(card=>card!==action.payload);
+            },
+            filterGenderCase: (state,action)=>{
+                if(action.payload==='all'){
+                    state.currentCards=state.allCards;
+                    state.prefFilters=state.currentCards;
+                }else{
+                    state.currentCards=state.allCards.filter(card=>card.gender===action.payload);
+                    state.prefFilters=state.currentCards;
+                }
+            },
+            filterStatusCase: (state,action)=>{
+                if(action.payload==='all'){
+                    state.currentCards=state.prefFilters
+                }else{
+                    state.currentCards=state.prefFilters.filter(card=>card.status===action.payload);
+                }
+            },
+            orderCharCase: (state,action)=>{
+                const ordered=state.allCards.sort((a,b)=>{
+                    if(action.payload!=='rdm'){
+                        if(a.name>b.name){
+                            return action.payload==='asc'?1:-1;
+                        }else{
+                            return action.payload==='des'?1:-1;
+                        }
+                    }
+                });
+                state.currentCards=ordered;
+            },
+            discardFilterCase: (state)=>{
+                state.currentCards=state.allCards;
+                state.prefFilters=state.currentCards;
             }
         }
     }
@@ -47,6 +86,10 @@ export const {
     delCharCase,
     getFavCase,
     delFavCase,
+    filterGenderCase,
+    filterStatusCase,
+    orderCharCase,
+    discardFilterCase,
 }=cardsSlice.actions;
 
 export default cardsSlice.reducer;
@@ -99,8 +142,20 @@ export const delFavAction=(email,id)=> async (dispatch)=>{
         await axios
         .delete(`card/${email}/${id}`)
         .then((r)=>r.data);
-        dispatch(delFavCase(id))
+        dispatch(delFavCase(id));
     } catch (error) {
         console.log(error)
     }
+}
+export const filterGenderAction=(gender)=>(dispatch)=>{
+    dispatch(filterGenderCase(gender));
+}
+export const filterStatusAction=(status)=>(dispatch)=>{
+    dispatch(filterStatusCase(status));
+}
+export const orderCharAction=(order)=>(dispatch)=>{
+    dispatch(orderCharCase(order));
+}
+export const discardFilterAction=()=>(dispatch)=>{
+    dispatch(discardFilterCase())
 }

@@ -1,4 +1,14 @@
-.xCenter{
+body{
+  margin: 0;
+  padding: 15px;
+  background-image: url(./image/rick-y-morty-portal-dimensional-6603.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "Roboto";
+	font-size: 20px;
+}
+/* .xCenter{
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -26,4 +36,115 @@
 }
 .btn:hover{
   background-color: rgba(243, 236, 236, 0.5);
+} */
+/*Card*/
+/* .divCard{
+  height: 70%;
+  width: 350px;
+  padding: 1em;
+  margin: 5px;
+  font-weight: 500;
+  border-radius: 5%;
+  background-color: #fcff4fc9;
 }
+.divCard:hover{
+  background-color: #262623c9;
+  color: white;
+  box-shadow: 1px 1px 10px 10px #fcff4f;
+}
+.charImage{
+  border-radius: 15px 15px 0px 0px;
+  margin: 0px 25px 0px 25px;
+  width: 300px;
+  box-shadow: 1px 1px 10px 10px #fcff4fc9;
+}
+.charName{
+  border-radius: 0px 0px 15px 15px;
+  background-color: #262623c9;
+  margin: 0px 25px 0px 25px;
+  width: 300px;
+  box-shadow: 1px 1px 10px 10px #fcff4fc9;
+  color:white;
+}*/
+.favButton{
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: o;
+}
+.closeButton{
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-radius:50%;
+  align-content: right;
+} 
+/*Cards*/
+/* .divCards{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100vw;
+  height: 80vh;
+  border: none;
+} */
+/*Form*/
+/* .contentForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+}
+.labelForm{
+  background-color: #fcff4fc9;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 5px 5px 0 0;
+}
+.inputForm{
+  border-radius: 10px;
+  font-size: 20px;
+  font-family: cursive;
+}
+.errorForm{
+  border-radius: 10px;
+  background-color: #fcff4fc9;
+  margin: 5px;
+  padding: 8px;
+  font-size: 17px;
+  color:crimson;
+  width: fit-content;
+}
+.btn{
+  background-color: #262623c9;
+  color: white;
+  font-family: cursive;
+  font-size: 20px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 10px #fcff4fc9;
+  margin: 20px 10px;
+  padding: 8px;
+}
+.btn:hover{
+  color: navy;
+  background-color: #f8f8ffc9;
+} */
+/*Detail*/
+/* .imageDetail{
+  border-radius: 10px;
+  width: 390px;
+}
+.textDetail{
+  border-radius: 10px;
+  background-color: #fcff4fc9;
+  font-family: cursive;
+  font-size: 18px;
+  padding: 20px;
+  width: fit-content;
+  margin: 10px;
+} */

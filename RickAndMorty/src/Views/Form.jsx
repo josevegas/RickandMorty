@@ -50,53 +50,40 @@ const Form=(props)=>{
     }
 
     return(
-        <div className="yCenter">
+        <div className="container">
             <form onSubmit={handleSubmit}>
-                <div className="space-y-12">
-                    <div  className="xCenter">
-                        <div className="yCenter">
-                            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Usuario:</label>
-                            <div className="mt-2">
-                                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input 
-                                        type="text" 
-                                        name="email" 
-                                        id="email"
-                                        value={userData.email} 
-                                        onChange={handleChange} 
-                                        className="boxinput"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div  className="mb-3">
+                    <label htmlFor="username" className="form-label text-bg-dark">Usuario:</label>
+                    <input 
+                        type="text" 
+                        name="email" 
+                        id="email"
+                        value={userData.email} 
+                        onChange={handleChange} 
+                        className="form-control"
+                        style={{width: '500px'}}
+                    />
                 </div>
                 <div>
-                {(error.email&&isSubmit)? <p>{error.email}</p>: null}
+                {(error.email&&isSubmit)? <p className="errorForm">{error.email}</p>: null}
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="password" className="form-label text-bg-dark">Contraseña:</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        value={userData.password} 
+                        onChange={handleChange}
+                        className="form-control"
+                        style={{width: '500px'}}
+                    /> 
                 </div>
                 <div>
-                    <div className="xCenter">
-                        <div className="yCenter">
-                            <label htmlFor="password">Contraseña:</label>
-                            <div>
-                                <div>
-                                    <input 
-                                        type="password" 
-                                        name="password" 
-                                        value={userData.password} 
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-                <div>
-                {(error.password&&isSubmit)? <p>{error.password}</p>: null}
+                {(error.password&&isSubmit)? <p className="errorForm">{error.password}</p>: null}
                 </div>
                 <div className="xJustify">
-                    {sign?<button type="submit" className="btn">Registrar</button>:<button type="submit" className="btn">Ingresar</button>}
-                    {!sign?<button onClick={handleSign} className="btn">Registrarse</button>:null}
+                    {sign?<button type="submit" className="btn btn-primary m-2">Registrar</button>:<button type="submit" className="btn btn-primary m-2">Ingresar</button>}
+                    {!sign?<button type="button" onClick={handleSign} className="btn btn-primary m-2">Registrarse</button>:null}
                 </div>
             </form>
         </div>
