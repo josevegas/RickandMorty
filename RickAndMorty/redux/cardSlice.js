@@ -74,6 +74,10 @@ export const cardsSlice=createSlice(
             discardFilterCase: (state)=>{
                 state.currentCards=state.allCards;
                 state.prefFilters=state.currentCards;
+            },
+            closeCase: (state)=>{
+                state.user=null;
+                state.login=false;
             }
         }
     }
@@ -90,6 +94,7 @@ export const {
     filterStatusCase,
     orderCharCase,
     discardFilterCase,
+    closeCase,
 }=cardsSlice.actions;
 
 export default cardsSlice.reducer;
@@ -158,4 +163,7 @@ export const orderCharAction=(order)=>(dispatch)=>{
 }
 export const discardFilterAction=()=>(dispatch)=>{
     dispatch(discardFilterCase())
+}
+export const closeAction=()=>(dispatch)=>{
+    dispatch(closeCase())
 }

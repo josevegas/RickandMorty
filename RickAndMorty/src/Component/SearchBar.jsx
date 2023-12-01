@@ -15,7 +15,7 @@ const SearchBar=(props)=>{
 
     return(
         <div className="d-flex" role="search">
-            <input type="search" onChange={handleInput} value={character} className="form-control me-2"/>
+            <input type="search" onChange={handleInput} value={character} className="form-control me-2" placeholder='Ingrese número de id'/>
             <button onClick={handleClick} className="btn btn-outline-success" type="submit">Agregar</button>
         </div>
     )

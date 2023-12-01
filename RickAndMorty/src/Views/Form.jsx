@@ -62,6 +62,7 @@ const Form=(props)=>{
                         onChange={handleChange} 
                         className="form-control"
                         style={{width: '500px'}}
+                        placeholder='user@email.com'
                     />
                 </div>
                 <div>

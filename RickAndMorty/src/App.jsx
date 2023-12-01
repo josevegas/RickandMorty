@@ -15,7 +15,6 @@ const App=()=>{
    const [access,setAccess]=useState(false);
     const navigate=useNavigate();
     const dispatch=useDispatch();
-    //const URL = 'https://rickandmorty-production-7404.up.railway.app/';
     const characters=useSelector(state=>state.cardsReducer.allCards);
 
     const onSearch=(id)=>{
